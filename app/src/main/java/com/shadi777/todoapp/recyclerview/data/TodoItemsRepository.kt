@@ -1,6 +1,7 @@
 package com.shadi777.todoapp.recyclerview.data
 
 import java.util.Calendar
+import java.util.Date
 
 
 class TodoItemsRepository() {
@@ -14,7 +15,7 @@ class TodoItemsRepository() {
             val text = "Пример дела #${i}"
             val priority:Priority = Priority.values()[i % 3]
             val is_done = i % 2 != 0
-            val create_date: Long = System.currentTimeMillis()
+            val create_date: Date = Date()
 
             val todoItem = TodoItem(id, text, priority, is_done, create_date)
             addTodoItem(todoItem)
@@ -24,7 +25,7 @@ class TodoItemsRepository() {
             val text: String = "Пример дела #${i}\nЕсть 2 строка"
             val priority:Priority = Priority.values()[i % 3]
             val is_done = i % 2 != 0
-            val create_date: Long = System.currentTimeMillis()
+            val create_date: Date = Date()
 
             val todoItem = TodoItem(id, text, priority, is_done, create_date)
             addTodoItem(todoItem)
@@ -34,7 +35,7 @@ class TodoItemsRepository() {
             val text: String = "Пример дела #${i}\nЕсть 2 строка\nЕсть 3 строка"
             val priority:Priority = Priority.values()[i % 3]
             val is_done = i % 2 != 0
-            val create_date: Long = System.currentTimeMillis()
+            val create_date: Date = Date()
 
             val todoItem = TodoItem(id, text, priority, is_done, create_date)
             addTodoItem(todoItem)
@@ -44,7 +45,7 @@ class TodoItemsRepository() {
             val text: String = "Пример дела #${i}\nВ этом деле много слов, поэтому после переполнения должно стоять многоточие"
             val priority:Priority = Priority.values()[i % 3]
             val is_done = i % 2 != 0
-            val create_date: Long = System.currentTimeMillis()
+            val create_date: Date = Date()
 
             val todoItem = TodoItem(id, text, priority, is_done, create_date)
             addTodoItem(todoItem)
@@ -54,8 +55,9 @@ class TodoItemsRepository() {
             val text: String = "Пример дела #${i}\nС дедлайном на завтра"
             val priority:Priority = Priority.values()[i % 3]
             val is_done = i % 2 != 0
-            val create_date: Long = System.currentTimeMillis()
-            val deadline_date: Long = System.currentTimeMillis() + 86400 * 1000
+            val create_date: Date = Date()
+            val deadline_date: Date = Date()
+            deadline_date.time += 86400 * 1000
 
             val todoItem = TodoItem(id, text, priority, is_done, create_date, deadline_date)
             addTodoItem(todoItem)

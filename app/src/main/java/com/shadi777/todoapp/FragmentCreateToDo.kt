@@ -64,11 +64,11 @@ class FragmentCreateToDo : Fragment() {
 
 
         // Set switch to open calendar date picker
-        var deadlineDate: Long = item.deadline_date
-        if (deadlineDate != 0L) {
+        var deadlineDate: Date? = item.deadline_date
+        if (deadlineDate != null) {
             binding.switchDate.isChecked = true
             val calendar = Calendar.getInstance()
-            calendar.timeInMillis = deadlineDate
+            calendar.timeInMillis = deadlineDate.time
             val zonedDateTime = calendar.time.toInstant().atZone(ZoneId.systemDefault())
             val dateString = "${zonedDateTime.dayOfMonth} ${
                 this.requireContext().resources.getStringArray(R.array.MONTHS)[zonedDateTime.monthValue - 1]
@@ -88,7 +88,7 @@ class FragmentCreateToDo : Fragment() {
                     DatePickerDialog.OnDateSetListener { v, y, m, d ->
                         val calendar = Calendar.getInstance()
                         calendar.set(y, m, d)
-                        deadlineDate = calendar.timeInMillis
+                        deadlineDate = calendar.time
                         val m_string =
                             this.requireContext().resources.getStringArray(R.array.MONTHS)[m]
                         binding.textViewDateUntil.setText("$d $m_string $y")
@@ -105,7 +105,7 @@ class FragmentCreateToDo : Fragment() {
                     .setTextColor(getResources().getColor(R.color.color_blue))
 
             } else {
-                deadlineDate = 0
+                deadlineDate = null
                 binding.textViewDateUntil.setText("")
             }
         }
@@ -136,7 +136,7 @@ class FragmentCreateToDo : Fragment() {
 
             val action: Action
             if (item.text.isNotEmpty()) {
-                item.change_date = Calendar.getInstance().timeInMillis
+                item.change_date = Date()
                 action = Action.SAVE_CHANGE
             } else {
                 action = Action.SAVE_NEW

@@ -62,11 +62,11 @@ class TodoItemViewHolder(val binding: ItemTodoBinding) : RecyclerView.ViewHolder
     fun onBind(item: TodoItem) {
         binding.textViewText.text = item.text
 
-        if (item.deadline_date != 0L) {
+        if (item.deadline_date != null) {
             binding.textViewDate.visibility = View.VISIBLE
 
             val calendar = Calendar.getInstance()
-            calendar.timeInMillis = item.deadline_date
+            calendar.timeInMillis = item.deadline_date!!.time
             val zonedDateTime = calendar.time.toInstant().atZone(ZoneId.systemDefault())
             val dateString = "${zonedDateTime.dayOfMonth} ${
                 itemView.getResources().getStringArray(R.array.MONTHS)[zonedDateTime.monthValue - 1]

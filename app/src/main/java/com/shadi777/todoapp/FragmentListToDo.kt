@@ -20,6 +20,7 @@ import com.shadi777.todoapp.recyclerview.data.Priority
 import com.shadi777.todoapp.recyclerview.data.SharedTodoItem
 import com.shadi777.todoapp.recyclerview.data.TodoItem
 import com.shadi777.todoapp.recyclerview.data.TodoItemsRepository
+import java.util.Date
 
 
 class FragmentListToDo : Fragment() {
@@ -67,7 +68,7 @@ class FragmentListToDo : Fragment() {
                     "",
                     Priority.Default,
                     false,
-                    System.currentTimeMillis()
+                    Date()
                 )
             val action =
                 FragmentListToDoDirections.actionFragmentListToDoToFragmentCreateToDo(todoItem)

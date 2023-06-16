@@ -1,6 +1,7 @@
 package com.shadi777.todoapp.recyclerview.data
 
 import java.io.Serializable
+import java.util.Date
 
 enum class Priority {
     Default, Low, High
@@ -11,7 +12,7 @@ data class TodoItem (
     var text: String,
     var priority: Priority,
     var is_done: Boolean,
-    var create_date: Long,
-    var deadline_date: Long = 0, // optional
-    var change_date: Long = 0 // optional
+    var create_date: Date,
+    var deadline_date: Date? = null,// optional
+    var change_date: Date? = null // optional
 ) : Serializable
