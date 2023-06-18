@@ -1,13 +1,13 @@
 package com.shadi777.todoapp.recyclerview.data
 
-import java.util.Calendar
 import java.util.Date
 
 
-class TodoItemsRepository() {
-
-    var idIterator: Long = 0
-    val itemlist: MutableList<TodoItem> = mutableListOf<TodoItem>()
+class TodoItemsRepository {
+    companion object {
+        var idIterator: Long = 0
+        val itemlist: MutableList<TodoItem> = mutableListOf<TodoItem>()
+    }
 
     init {
         for(i in 1..6) {

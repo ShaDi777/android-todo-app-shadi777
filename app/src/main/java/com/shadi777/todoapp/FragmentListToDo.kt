@@ -20,13 +20,17 @@ import com.shadi777.todoapp.recyclerview.data.Priority
 import com.shadi777.todoapp.recyclerview.data.SharedTodoItem
 import com.shadi777.todoapp.recyclerview.data.TodoItem
 import com.shadi777.todoapp.recyclerview.data.TodoItemsRepository
+import com.shadi777.todoapp.recyclerview.data.TodoItemsRepository.Companion.idIterator
+import com.shadi777.todoapp.recyclerview.data.TodoItemsRepository.Companion.itemlist
 import java.util.Date
 
 
 class FragmentListToDo : Fragment() {
 
+    private lateinit var recyclerView: RecyclerView
+    private val todoAdapter = TodoAdapter()
     private val todoItemsRepository = TodoItemsRepository()
-    private var isDoneVisible = false
+    private var isDoneVisible = true
 
     private var _binding: FragmentListToDoBinding? = null
     private val binding get() = _binding!!
@@ -64,7 +68,7 @@ class FragmentListToDo : Fragment() {
         binding.buttonAddTask.setOnClickListener {
             val todoItem =
                 TodoItem(
-                    todoItemsRepository.idIterator.toString(),
+                    idIterator.toString(),
                     "",
                     Priority.Default,
                     false,
@@ -75,27 +79,42 @@ class FragmentListToDo : Fragment() {
             Navigation.findNavController(view).navigate(action)
         }
 
-
-        val recyclerView: RecyclerView = binding.recyclerView
-        val todoAdapter = TodoAdapter()
-        val layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-        recyclerView.adapter = todoAdapter
-        recyclerView.layoutManager = layoutManager
-        todoAdapter.itemlist = todoItemsRepository.itemlist
+        initRecyclerView()
 
         binding.textViewDone.text = String.format(
             getResources().getString(R.string.done_sublabel),
             todoItemsRepository.countDone()
         )
 
+        setVisibleTasksAndIcon(isDoneVisible)
+
         binding.imageViewVisible.setOnClickListener {
-            when (isDoneVisible) {
-                true -> binding.imageViewVisible.setImageResource(R.drawable.ic_visibility_off)
-                else -> binding.imageViewVisible.setImageResource(R.drawable.ic_visibility)
-            }
             isDoneVisible = !isDoneVisible
-            todoAdapter.itemlist = todoItemsRepository.getTasks(isDoneVisible)
+            setVisibleTasksAndIcon(isDoneVisible)
         }
+    }
+
+    private fun initRecyclerView() {
+        recyclerView = binding.recyclerView
+        recyclerView.adapter = todoAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+
+        todoAdapter.setOnChangeItemListener {
+            binding.textViewDone.text = String.format(
+                getResources().getString(R.string.done_sublabel),
+                todoItemsRepository.countDone()
+            )
+
+            todoAdapter.submitList(todoItemsRepository.getTasks(isDoneVisible))
+        }
+    }
+
+    private fun setVisibleTasksAndIcon(isDoneVisible: Boolean) {
+        when (isDoneVisible) {
+            true -> binding.imageViewVisible.setImageResource(R.drawable.ic_visibility)
+            else -> binding.imageViewVisible.setImageResource(R.drawable.ic_visibility_off)
+        }
+        todoAdapter.submitList(todoItemsRepository.getTasks(isDoneVisible))
     }
 
     override fun onDestroyView() {

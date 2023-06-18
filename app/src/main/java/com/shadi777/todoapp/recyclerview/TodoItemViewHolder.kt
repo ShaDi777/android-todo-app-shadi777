@@ -19,7 +19,7 @@ import java.util.Calendar
 import java.util.Date
 
 
-class TodoItemViewHolder(val binding: ItemTodoBinding) : RecyclerView.ViewHolder(binding.root) {
+class TodoItemViewHolder(val binding: ItemTodoBinding, val onItemChangeListener: (() -> Unit)?,) : RecyclerView.ViewHolder(binding.root) {
 
     private fun setIcon(imageView: ImageView, icon: Int, icon_color: Int) {
         imageView.setImageResource(icon)
@@ -57,6 +57,7 @@ class TodoItemViewHolder(val binding: ItemTodoBinding) : RecyclerView.ViewHolder
             )
             binding.textViewText.setPaintFlags(binding.textViewText.getPaintFlags() and Paint.STRIKE_THRU_TEXT_FLAG.inv())
         }
+        onItemChangeListener?.invoke()
     }
 
     fun onBind(item: TodoItem) {
