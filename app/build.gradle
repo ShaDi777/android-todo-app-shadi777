@@ -4,17 +4,17 @@ plugins {
     id 'androidx.navigation.safeargs'
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.8.21'
     id 'kotlin-kapt'
-    id("upload-tg-plugin")
+    // id("upload-tg-plugin")
 }
 
 android {
     namespace 'com.shadi777.todoapp'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.shadi777.todoapp"
         minSdk 26
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
