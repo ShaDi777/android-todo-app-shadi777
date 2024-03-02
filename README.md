@@ -11,24 +11,25 @@
 ---
 Вид приложения:
 
-![mainScreen](screenshots/main_screen.png)
-![mainScreenDark](screenshots/dark_main_screen.png)
+<img src="screenshots/main_screen.png" alt="LightMainScreen" height="400"/>
+<img src="screenshots/dark_main_screen.png" alt="DarkMainScreen" height="400"/>
 
 ---
 Экран изменения задачи:
 
-![editTask](screenshots/edit_task.png)
+<img src="screenshots/edit_task.png" alt="EditTask" height="400"/>
 
 ---
 Возможность отмечать задачи как выполненные. Восстановление недавно удаленных задач.
 
-![feature](screenshots/features_1.png)
+<img src="screenshots/features_1.png" alt="Features" height="400"/>
 
 
 ---
 Возможность скрывать выполненные задачи:
 
-![listTask](screenshots/list_completed.png)
-![listTask](screenshots/hide_completed.png)
+<img src="screenshots/list_completed.png" alt="ListTask" height="400"/>
+<img src="screenshots/hide_completed.png" alt="ListUncompletedTask" height="400"/>
+
 
 
